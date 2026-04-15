@@ -1,0 +1,1712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jillian's Guide — What My Numbers Mean</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #2D8A4E;
+    --green-bg: #E8F5EC;
+    --green-border: #A8D5B8;
+    --yellow: #B8860B;
+    --yellow-bg: #FFF8E1;
+    --yellow-border: #E8D59E;
+    --orange: #C55A11;
+    --orange-bg: #FFF0E6;
+    --orange-border: #E8B896;
+    --red: #C0392B;
+    --red-bg: #FDECEC;
+    --red-border: #E8A8A8;
+    --text: #2C2C2C;
+    --text-light: #5A5A5A;
+    --bg: #FAFAF7;
+    --card-bg: #FFFFFF;
+    --divider: #E8E5DE;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #F5F0E8 0%, #EDE8DD 100%);
+    padding: 32px 24px 28px;
+    text-align: center;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .header h1 {
+    font-family: 'Lora', serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+
+  .header p {
+    font-size: 15px;
+    color: var(--text-light);
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .reminder-banner {
+    background: #F0EDE6;
+    border-left: 4px solid #B8A88A;
+    margin: 20px 16px;
+    padding: 16px 18px;
+    border-radius: 0 10px 10px 0;
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.55;
+  }
+
+  .reminder-banner strong {
+    display: block;
+    margin-bottom: 4px;
+    font-family: 'Lora', serif;
+    font-size: 16px;
+  }
+
+  .tab-container {
+    display: flex;
+    gap: 0;
+    padding: 16px 16px 0;
+    border-bottom: 1px solid var(--divider);
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .tab {
+    flex: 1;
+    padding: 12px 8px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-light);
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+  }
+
+  .tab.active {
+    color: var(--text);
+    border-bottom-color: #6B5B3E;
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ===== Check & Log Section ===== */
+  .day-section {
+    margin: 20px 16px;
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 24px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border: 1px solid var(--divider);
+  }
+
+  .day-section h2 {
+    font-family: 'Lora', serif;
+    font-size: 20px;
+    margin-bottom: 6px;
+  }
+
+  .day-section .section-subtitle {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+
+  .reading-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .reading-row .input-group {
+    flex: 1;
+  }
+
+  .input-group {
+    margin-bottom: 14px;
+  }
+
+  .input-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--text-light);
+  }
+
+  .input-group input, .input-group textarea, .input-group select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid var(--divider);
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    text-align: center;
+    transition: border-color 0.2s;
+    background: var(--bg);
+  }
+
+  .input-group textarea {
+    font-size: 15px;
+    font-weight: 400;
+    text-align: left;
+    min-height: 80px;
+    resize: vertical;
+    line-height: 1.5;
+  }
+
+  .input-group input:focus, .input-group textarea:focus {
+    outline: none;
+    border-color: #6B5B3E;
+  }
+
+  .time-select {
+    font-size: 15px !important;
+    font-weight: 500 !important;
+  }
+
+  .check-btn {
+    width: 100%;
+    padding: 16px;
+    background: #6B5B3E;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 8px;
+  }
+
+  .check-btn:hover { background: #5A4B30; }
+
+  .check-btn.secondary {
+    background: #8B7B5E;
+    font-size: 15px;
+    padding: 14px;
+  }
+
+  .check-btn.send-btn {
+    background: #2D8A4E;
+    margin-top: 16px;
+  }
+
+  .check-btn.send-btn:hover { background: #247A42; }
+
+  .result-box {
+    margin-top: 16px;
+    padding: 20px;
+    border-radius: 12px;
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .result-box.show { display: block; }
+
+  .result-box h3 {
+    font-family: 'Lora', serif;
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .result-box p {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== Symptom Log ===== */
+  .symptom-log-section {
+    margin: 16px 16px 0;
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border: 1px solid var(--divider);
+  }
+
+  .symptom-log-section h3 {
+    font-family: 'Lora', serif;
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+
+  .symptom-category-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #8B7B5E;
+    margin: 14px 0 8px;
+    padding-top: 10px;
+    border-top: 1px solid #F0EDE6;
+  }
+
+  .symptom-category-title:first-of-type {
+    border-top: none;
+    margin-top: 8px;
+  }
+
+  .symptom-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    background: #FAFAF7;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+    border: 1px solid transparent;
+  }
+
+  .symptom-row.checked {
+    background: var(--green-bg);
+    border-color: var(--green-border);
+  }
+
+  .symptom-row input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--green);
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  .symptom-label {
+    font-size: 14px;
+    line-height: 1.4;
+    flex: 1;
+  }
+
+  .symptom-timing {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    background: #F0EDE6;
+    color: #8B7B5E;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    border: none;
+  }
+
+  .symptom-timing.earlier {
+    background: #E8E5DE;
+    color: #6B5B3E;
+  }
+
+  /* ===== Evening / Notes Section ===== */
+  .evening-section {
+    margin: 16px 16px 0;
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border: 1px solid var(--divider);
+  }
+
+  .evening-section h3 {
+    font-family: 'Lora', serif;
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+
+  .day-summary-preview {
+    margin: 16px 16px 0;
+    background: #F5F0E8;
+    border-radius: 14px;
+    padding: 20px;
+    border: 1px solid #E0D8C8;
+  }
+
+  .day-summary-preview h3 {
+    font-family: 'Lora', serif;
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  .summary-content {
+    font-size: 14px;
+    line-height: 1.6;
+    white-space: pre-line;
+    color: var(--text);
+    background: rgba(255,255,255,0.5);
+    padding: 14px;
+    border-radius: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  /* ===== Breathing box ===== */
+  .breathing-box {
+    background: rgba(255,255,255,0.75);
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+    margin: 16px 16px 20px;
+    border: 1px dashed rgba(0,0,0,0.1);
+  }
+
+  .breathing-box .breath-label {
+    font-family: 'Lora', serif;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+
+  /* ===== Zone Cards ===== */
+  .zone-card {
+    margin: 16px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border: 1px solid;
+  }
+
+  .zone-header {
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .zone-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .zone-title {
+    font-family: 'Lora', serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .zone-range {
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 2px;
+  }
+
+  .zone-body { padding: 0 18px 18px; }
+
+  .zone-section { margin-bottom: 14px; }
+  .zone-section:last-child { margin-bottom: 0; }
+
+  .zone-section-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 6px;
+    opacity: 0.7;
+  }
+
+  .zone-section p, .zone-section li {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .zone-section ul { list-style: none; padding: 0; }
+
+  .zone-section li {
+    padding: 4px 0;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .zone-section li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .zone-green { background: var(--green-bg); border-color: var(--green-border); }
+  .zone-green .zone-icon { background: var(--green); color: white; }
+  .zone-green .zone-title { color: var(--green); }
+  .zone-green .zone-range { color: #3A9B5B; }
+  .zone-green .zone-section-title { color: var(--green); }
+  .zone-green li::before { background: var(--green); }
+
+  .zone-yellow { background: var(--yellow-bg); border-color: var(--yellow-border); }
+  .zone-yellow .zone-icon { background: var(--yellow); color: white; }
+  .zone-yellow .zone-title { color: var(--yellow); }
+  .zone-yellow .zone-range { color: #C49512; }
+  .zone-yellow .zone-section-title { color: var(--yellow); }
+  .zone-yellow li::before { background: var(--yellow); }
+
+  .zone-orange { background: var(--orange-bg); border-color: var(--orange-border); }
+  .zone-orange .zone-icon { background: var(--orange); color: white; }
+  .zone-orange .zone-title { color: var(--orange); }
+  .zone-orange .zone-range { color: #D06A20; }
+  .zone-orange .zone-section-title { color: var(--orange); }
+  .zone-orange li::before { background: var(--orange); }
+
+  .zone-red { background: var(--red-bg); border-color: var(--red-border); }
+  .zone-red .zone-icon { background: var(--red); color: white; }
+  .zone-red .zone-title { color: var(--red); }
+  .zone-red .zone-range { color: #D04A3D; }
+  .zone-red .zone-section-title { color: var(--red); }
+  .zone-red li::before { background: var(--red); }
+
+  .action-box {
+    background: rgba(255,255,255,0.6);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 10px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .action-box .action-title {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .action-box ol { padding-left: 20px; margin: 0; }
+
+  .action-box li {
+    padding: 3px 0;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .action-box li::before { display: none; }
+
+  .expand-arrow {
+    margin-left: auto;
+    font-size: 18px;
+    color: var(--text-light);
+    transition: transform 0.2s;
+  }
+
+  .zone-card.expanded .expand-arrow { transform: rotate(180deg); }
+
+  .hr-low-note {
+    background: #EDE8F5;
+    border: 1px solid #C9BEE0;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 16px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #4A3A6B;
+  }
+
+  .hr-low-note strong { display: block; margin-bottom: 4px; }
+
+  /* ===== Meds Reference ===== */
+  .med-ref {
+    margin: 16px;
+    background: var(--card-bg);
+    border: 1px solid var(--divider);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .med-ref-header {
+    padding: 16px 18px;
+    background: #F5F0E8;
+    font-family: 'Lora', serif;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .med-ref-body {
+    padding: 16px 18px;
+    display: none;
+  }
+
+  .med-ref.open .med-ref-body { display: block; }
+
+  .med-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .med-table th {
+    text-align: left;
+    padding: 8px 8px 8px 0;
+    border-bottom: 2px solid var(--divider);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-light);
+  }
+
+  .med-table td {
+    padding: 10px 8px 10px 0;
+    border-bottom: 1px solid #F0EDE6;
+    vertical-align: top;
+    line-height: 1.45;
+  }
+
+  .med-table tr:last-child td { border-bottom: none; }
+
+  .footer-note {
+    margin: 24px 16px 40px;
+    padding: 18px;
+    background: #F5F0E8;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  .footer-note strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  .reset-link {
+    font-size: 13px;
+    color: var(--text-light);
+    text-decoration: underline;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    margin-top: 8px;
+    display: inline-block;
+  }
+
+  .feeling-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid var(--divider);
+    background: var(--bg);
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .feeling-btn.selected {
+    background: #6B5B3E;
+    color: white;
+    border-color: #6B5B3E;
+  }
+
+  .med-row {
+    cursor: pointer;
+  }
+
+  .med-row.checked {
+    background: var(--green-bg);
+    border-color: var(--green-border);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>What My Numbers Mean</h1>
+  <p>A personal guide to understanding your blood pressure and heart rate readings. Built from your own data.</p>
+</div>
+
+<div class="reminder-banner">
+  <strong>Before you read your numbers</strong>
+  Your doctors have confirmed that your heart is structurally healthy. Your HeartBug monitor showed normal sinus rhythm. What you experience are surges from your nervous system, not heart disease. These numbers help you respond calmly.
+</div>
+
+<div class="tab-container">
+  <button class="tab active" data-tab="checklog">My Day</button>
+  <button class="tab" data-tab="bp">BP Zones</button>
+  <button class="tab" data-tab="hr">HR Zones</button>
+  <button class="tab" data-tab="meds">Meds</button>
+</div>
+
+<!-- ==================== CHECK & LOG TAB ==================== -->
+<div class="tab-panel active" data-panel="checklog">
+
+  <!-- Morning / Current Reading -->
+  <div class="day-section">
+    <h2>Check My Reading</h2>
+    <p class="section-subtitle">Enter your numbers any time. You will get reassurance based on your own history.</p>
+
+    <div class="input-group">
+      <label>When is this reading?</label>
+      <select id="readingTime" class="time-select" style="text-align:left;">
+        <option value="morning">Morning</option>
+        <option value="midday">Middle of the day</option>
+        <option value="afternoon" selected>Afternoon</option>
+        <option value="evening">Evening</option>
+        <option value="night">Night (woke up)</option>
+      </select>
+    </div>
+
+    <div class="reading-row">
+      <div class="input-group">
+        <label>Top Number</label>
+        <input type="number" id="sysInput" placeholder="e.g. 132" inputmode="numeric">
+      </div>
+      <div class="input-group">
+        <label>Bottom Number</label>
+        <input type="number" id="diaInput" placeholder="e.g. 75" inputmode="numeric">
+      </div>
+      <div class="input-group">
+        <label>Heart Rate</label>
+        <input type="number" id="hrInput" placeholder="e.g. 68" inputmode="numeric">
+      </div>
+    </div>
+
+    <button class="check-btn" id="checkBtn1">What Does This Mean?</button>
+    <div class="result-box" id="resultBox"></div>
+  </div>
+
+  <!-- Symptoms -->
+  <div class="symptom-log-section">
+    <h3>How Am I Feeling?</h3>
+    <p class="section-subtitle" style="margin-bottom:8px;">Optional. Tick what applies. Tap "now" to change to "earlier" if it has passed.</p>
+
+    <div class="symptom-category-title">Heart &amp; Heat</div>
+    <div class="symptom-row">
+      <input type="checkbox" class="sym-cb" data-sym="Heart beating / pounding">
+      <span class="symptom-label">Heart beating or pounding</span>
+      <button class="symptom-timing">now</button>
+    </div>
+    <div class="symptom-row">
+      <input type="checkbox" class="sym-cb" data-sym="Heart beating feeling (not high HR)">
+      <span class="symptom-label">Heart beating feeling but not actual high heart rate</span>
+      <button class="symptom-timing">now</button>
+    </div>
+    <div class="symptom-row">
+      <input type="checkbox" class="sym-cb" data-sym="Heat in face or neck">
+      <span class="symptom-label">Heat in face or neck</span>
+      <button class="symptom-timing">now</button>
+    </div>
+    <div class="symptom-row">
+      <input type="checkbox" class="sym-cb" data-sym="Cold feet">
+      <span class="symptom-label">Cold feet</span>
+      <button class="symptom-timing">now</button>
+    </div>
+    <div class="symptom-row">
+      <input type="checkbox" class="sym-cb" data-sym="Sweating">
+      <span class="symptom-label">Sweating</span>
+      <button class="symptom-timing">now</button>
+    </div>
+
+    <div class="symptom-category-title">Head &amp; Pressure</div>
+    <div class="symptom-row">
+      <input type="checkbox" class="sym-cb" data-sym="Head pressure">
+      <span class="symptom-label">Head pressure</span>
+      <button class="symptom-timing">now</button>
+    </div>
+    <div class="symptom-row">
+      <input type="checkbox" class="sym-cb" data-sym="Foggy or unclear thinking">
+      <span class="symptom-label">Foggy or unclear thinking</span>
+      <button class="symptom-timing">now</button>
+    </div>
+
+    <div class="symptom-category-title">Spine, Pain &amp; Body</div>
+    <div class="symptom-row">
+      <input type="checkbox" class="sym-cb" data-sym="Spinal pain">
+      <span class="symptom-label">Spinal pain</span>
+      <button class="symptom-timing">now</button>
+    </div>
+    <div class="symptom-row">
+      <input type="checkbox" class="sym-cb" data-sym="Spinal stiffness">
+      <span class="symptom-label">Spinal stiffness</span>
+      <button class="symptom-timing">now</button>
+    </div>
+    <div class="symptom-row">
+      <input type="checkbox" class="sym-cb" data-sym="Ribs stuck or sore">
+      <span class="symptom-label">Ribs stuck or sore</span>
+      <button class="symptom-timing">now</button>
+    </div>
+    <div class="symptom-row">
+      <input type="checkbox" class="sym-cb" data-sym="Body buzzing / vibrating">
+      <span class="symptom-label">Body buzzing or vibrating</span>
+      <button class="symptom-timing">now</button>
+    </div>
+    <div class="symptom-row">
+      <input type="checkbox" class="sym-cb" data-sym="Muscles spasming">
+      <span class="symptom-label">Muscles spasming</span>
+      <button class="symptom-timing">now</button>
+    </div>
+    <div class="symptom-row">
+      <input type="checkbox" class="sym-cb" data-sym="Wafty / no structure feeling">
+      <span class="symptom-label">Wafty — body has no base or structure</span>
+      <button class="symptom-timing">now</button>
+    </div>
+
+    <div class="symptom-category-title">Energy &amp; General</div>
+    <div class="symptom-row">
+      <input type="checkbox" class="sym-cb" data-sym="Exhausted / no energy">
+      <span class="symptom-label">Exhausted or no energy</span>
+      <button class="symptom-timing">now</button>
+    </div>
+    <div class="symptom-row">
+      <input type="checkbox" class="sym-cb" data-sym="Nausea">
+      <span class="symptom-label">Nausea</span>
+      <button class="symptom-timing">now</button>
+    </div>
+    <div class="symptom-row">
+      <input type="checkbox" class="sym-cb" data-sym="Frightened or panicky">
+      <span class="symptom-label">Frightened or panicky feeling</span>
+      <button class="symptom-timing">now</button>
+    </div>
+    <div class="symptom-row">
+      <input type="checkbox" class="sym-cb" data-sym="Difficulty expanding lungs">
+      <span class="symptom-label">Difficulty expanding lungs</span>
+      <button class="symptom-timing">now</button>
+    </div>
+
+    <div class="symptom-category-title">Good Signs</div>
+    <div class="symptom-row">
+      <input type="checkbox" class="sym-cb" data-sym="Feeling calm and like myself">
+      <span class="symptom-label">Feeling calm and like myself</span>
+      <button class="symptom-timing">now</button>
+    </div>
+    <div class="symptom-row">
+      <input type="checkbox" class="sym-cb" data-sym="Slept well last night">
+      <span class="symptom-label">Slept well last night</span>
+      <button class="symptom-timing">now</button>
+    </div>
+    <div class="symptom-row">
+      <input type="checkbox" class="sym-cb" data-sym="Poor / broken sleep">
+      <span class="symptom-label">Poor or broken sleep last night</span>
+      <button class="symptom-timing">now</button>
+    </div>
+
+    <button class="reset-link" id="resetSymptomsBtn">Clear symptoms</button>
+  </div>
+
+  <!-- Evening Reading & Notes -->
+  <div class="evening-section">
+    <h3>Second BP Reading (optional)</h3>
+    <p class="section-subtitle" style="margin-bottom:14px;">Add another reading later in the day if you like.</p>
+
+    <div class="reading-row">
+      <div class="input-group">
+        <label>Top Number</label>
+        <input type="number" id="sysInput2" placeholder="e.g. 128" inputmode="numeric">
+      </div>
+      <div class="input-group">
+        <label>Bottom Number</label>
+        <input type="number" id="diaInput2" placeholder="e.g. 72" inputmode="numeric">
+      </div>
+      <div class="input-group">
+        <label>Heart Rate</label>
+        <input type="number" id="hrInput2" placeholder="e.g. 65" inputmode="numeric">
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label>When was this?</label>
+      <select id="readingTime2" class="time-select" style="text-align:left;">
+        <option value="morning">Morning</option>
+        <option value="afternoon">Afternoon</option>
+        <option value="evening" selected>Evening</option>
+        <option value="night">Night</option>
+      </select>
+    </div>
+
+    <button class="check-btn secondary" id="checkBtn2">Check This Reading Too</button>
+    <div class="result-box" id="resultBox2"></div>
+  </div>
+
+  <!-- Notes -->
+  <div class="evening-section" style="margin-top:16px;">
+    <h3>Notes for Today</h3>
+    <p class="section-subtitle" style="margin-bottom:14px;">Anything you want to remember about today. What you did, how you felt, what helped.</p>
+    <div class="input-group" style="margin-bottom:0;">
+      <textarea id="dayNotes" placeholder="e.g. Had a bath at 5pm and felt much better after. Spine was stiff all morning but eased in the afternoon..."></textarea>
+    </div>
+  </div>
+
+  <!-- Overall Feeling -->
+  <div class="evening-section" style="margin-top:16px;">
+    <h3>How Am I Feeling Overall Today?</h3>
+    <p class="section-subtitle" style="margin-bottom:12px;">1 = terrible &nbsp;&nbsp; 10 = wonderful</p>
+    <div style="display:flex; gap:6px; flex-wrap:wrap; justify-content:center;">
+      <button class="feeling-btn" data-val="1">1</button>
+      <button class="feeling-btn" data-val="2">2</button>
+      <button class="feeling-btn" data-val="3">3</button>
+      <button class="feeling-btn" data-val="4">4</button>
+      <button class="feeling-btn" data-val="5">5</button>
+      <button class="feeling-btn" data-val="6">6</button>
+      <button class="feeling-btn" data-val="7">7</button>
+      <button class="feeling-btn" data-val="8">8</button>
+      <button class="feeling-btn" data-val="9">9</button>
+      <button class="feeling-btn" data-val="10">10</button>
+    </div>
+  </div>
+
+  <!-- Sleep -->
+  <div class="evening-section" style="margin-top:16px;">
+    <h3>Last Night's Sleep</h3>
+    <div class="reading-row" style="margin-top:12px;">
+      <div class="input-group">
+        <label>Hours</label>
+        <input type="number" id="sleepHours" placeholder="e.g. 6" inputmode="numeric">
+      </div>
+      <div class="input-group">
+        <label>Minutes</label>
+        <input type="number" id="sleepMins" placeholder="e.g. 30" inputmode="numeric">
+      </div>
+      <div class="input-group">
+        <label>Watch Score</label>
+        <input type="number" id="sleepScore" placeholder="e.g. 74" inputmode="numeric">
+      </div>
+    </div>
+    <p class="section-subtitle" style="margin-top:4px;">Watch score is from your Apple Watch sleep quality (e.g. 74).</p>
+  </div>
+
+  <!-- Medications -->
+  <div class="evening-section" style="margin-top:16px;">
+    <h3>Medications Today</h3>
+    <p class="section-subtitle" style="margin-bottom:8px;">Tick what you have taken today.</p>
+
+    <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#8B7B5E;margin:10px 0 8px;">Regular</div>
+
+    <div class="symptom-row med-row">
+      <input type="checkbox" class="med-cb" data-med="½ Amlodipine (8am)">
+      <span class="symptom-label"><strong>½ Amlodipine</strong> <span style="color:var(--text-light);font-size:13px;">— 8am BP pill</span></span>
+    </div>
+    <div class="symptom-row med-row">
+      <input type="checkbox" class="med-cb" data-med="½ Amlodipine (8pm)">
+      <span class="symptom-label"><strong>½ Amlodipine</strong> <span style="color:var(--text-light);font-size:13px;">— 8pm BP pill</span></span>
+    </div>
+    <div class="symptom-row med-row">
+      <input type="checkbox" class="med-cb" data-med="¼ Metoprolol (nightly)">
+      <span class="symptom-label"><strong>¼ Metoprolol</strong> <span style="color:var(--text-light);font-size:13px;">— nightly beta blocker</span></span>
+    </div>
+    <div class="symptom-row med-row">
+      <input type="checkbox" class="med-cb" data-med="¼ Amitriptyline (nightly)">
+      <span class="symptom-label"><strong>¼ Amitriptyline</strong> <span style="color:var(--text-light);font-size:13px;">— nightly</span></span>
+    </div>
+
+    <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--orange);margin:16px 0 8px;padding-top:10px;border-top:1px solid #E8E5DE;">As Needed (Extra)</div>
+
+    <div class="symptom-row med-row">
+      <input type="checkbox" class="med-cb" data-med="¼ Mersyndol">
+      <span class="symptom-label"><strong>¼ Mersyndol</strong></span>
+    </div>
+    <div class="symptom-row med-row">
+      <input type="checkbox" class="med-cb" data-med="⅛ Restavit">
+      <span class="symptom-label"><strong>⅛ Restavit</strong> <span style="color:var(--text-light);font-size:13px;">— for sleep</span></span>
+    </div>
+    <div class="symptom-row med-row">
+      <input type="checkbox" class="med-cb" data-med="¼ Panamax Co.">
+      <span class="symptom-label"><strong>¼ Panamax Co.</strong> <span style="color:var(--text-light);font-size:13px;">— for bone pain</span></span>
+    </div>
+  </div>
+
+  <!-- Send My Day -->
+  <div style="padding: 0 16px;">
+    <button class="check-btn send-btn" id="sendDayBtn">Send My Day to Matt</button>
+    <p style="text-align:center; font-size:12px; color:var(--text-light); margin-top:8px;">This will open your email with today's report ready to send.</p>
+  </div>
+
+  <div class="breathing-box">
+    <div class="breath-label">Your Breathing — Alternating Nostril</div>
+    <p style="font-size: 15px; color: var(--text); margin-top: 4px; line-height: 1.5;">Close one nostril, breathe in slowly. Switch nostrils, breathe out slowly. Repeat for 20 rounds.</p>
+    <p style="font-size: 13px; color: var(--text-light); margin-top: 10px;">This is your go-to calming tool. Use it any time you feel activated.</p>
+  </div>
+
+</div>
+
+<!-- ==================== BP ZONES TAB ==================== -->
+<div class="tab-panel" data-panel="bp">
+
+  <div class="zone-card zone-green expanded">
+    <div class="zone-header">
+      <div class="zone-icon">&#10003;</div>
+      <div>
+        <div class="zone-title">Calm Zone</div>
+        <div class="zone-range">Systolic 110 to 135 &nbsp;|&nbsp; Diastolic 60 to 80</div>
+      </div>
+      <div class="expand-arrow">&#9660;</div>
+    </div>
+    <div class="zone-body">
+      <div class="zone-section">
+        <div class="zone-section-title">What This Means</div>
+        <p>This is where your body sits on a good day. About half of all your readings over the past 5 months have been in this range. Nothing to worry about at all. Your heart is doing its job beautifully.</p>
+      </div>
+      <div class="zone-section">
+        <div class="zone-section-title">What Has Helped You Here</div>
+        <p>Nothing needed. Go about your day. On days like 30 December you felt wonderful, had tea, breakfast, made chocolate sponge, shared it with friends. These are good days.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="zone-card zone-yellow">
+    <div class="zone-header">
+      <div class="zone-icon">&#9679;</div>
+      <div>
+        <div class="zone-title">Watch Zone</div>
+        <div class="zone-range">Systolic 136 to 155 &nbsp;|&nbsp; Diastolic 81 to 90</div>
+      </div>
+      <div class="expand-arrow">&#9660;</div>
+    </div>
+    <div class="zone-body">
+      <div class="zone-section">
+        <div class="zone-section-title">What This Means</div>
+        <p>Your nervous system is a bit activated. This is common for you, especially in the afternoon, after poor sleep, or on days with more pain. About a third of your readings land here. It does not mean anything dangerous is happening.</p>
+      </div>
+      <div class="zone-section">
+        <div class="zone-section-title">What Has Helped You Before</div>
+        <ul style="list-style:none;padding:0;">
+          <li style="padding:4px 0;">&#8226; Your alternating nostril breathing (20 rounds)</li>
+          <li style="padding:4px 0;">&#8226; Cold face washer on your face</li>
+          <li style="padding:4px 0;">&#8226; An Epsom salts bath — this consistently brings your numbers down</li>
+          <li style="padding:4px 0;">&#8226; Sitting or lying down quietly</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="zone-card zone-orange">
+    <div class="zone-header">
+      <div class="zone-icon">&#9888;</div>
+      <div>
+        <div class="zone-title">Active Zone</div>
+        <div class="zone-range">Systolic 156 to 170 &nbsp;|&nbsp; Diastolic 91 to 100</div>
+      </div>
+      <div class="expand-arrow">&#9660;</div>
+    </div>
+    <div class="zone-body">
+      <div class="zone-section">
+        <div class="zone-section-title">What This Means</div>
+        <p>Your nervous system has fired up more strongly. You have been here before and it has always come back down. Your records show about 17% of readings in this range. It is a surge, not a crisis.</p>
+      </div>
+      <div class="zone-section">
+        <div class="zone-section-title">What Has Helped You Before</div>
+        <ul style="list-style:none;padding:0;">
+          <li style="padding:4px 0;">&#8226; Stop what you are doing and lie down</li>
+          <li style="padding:4px 0;">&#8226; Start your alternating nostril breathing straight away</li>
+          <li style="padding:4px 0;">&#8226; Cold face washer on face and neck</li>
+          <li style="padding:4px 0;">&#8226; Wait 30 to 45 minutes, then re-check</li>
+          <li style="padding:4px 0;">&#8226; A warm bath once you feel steady enough</li>
+        </ul>
+      </div>
+      <div class="zone-section" style="margin-top: 12px;">
+        <p><strong>Remember:</strong> Your peak reading of 170/94 on 4 March came down to 120/71 by 5.30 pm that same day. It took time, but it came down with rest, breathing, and a bath.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="zone-card zone-red">
+    <div class="zone-header">
+      <div class="zone-icon">&#9888;</div>
+      <div>
+        <div class="zone-title">Get Help Zone</div>
+        <div class="zone-range">Systolic above 180 &nbsp;|&nbsp; Diastolic above 110</div>
+      </div>
+      <div class="expand-arrow">&#9660;</div>
+    </div>
+    <div class="zone-body">
+      <div class="zone-section">
+        <div class="zone-section-title">What This Means</div>
+        <p>This is higher than anything in your recent 5 months of records. Your highest was 170, so readings above 180 would be unusual for you and worth getting checked.</p>
+      </div>
+      <div class="zone-section">
+        <div class="zone-section-title">Call For Help If</div>
+        <ul style="list-style:none;padding:0;">
+          <li style="padding:4px 0;">&#8226; Your top number stays above 180 after 20 minutes of rest and breathing</li>
+          <li style="padding:4px 0;">&#8226; You have a sudden severe headache that feels different from your usual pressure</li>
+          <li style="padding:4px 0;">&#8226; You feel chest pain (not your usual heart beating, but actual pain or squeezing)</li>
+          <li style="padding:4px 0;">&#8226; You have trouble speaking or sudden confusion</li>
+          <li style="padding:4px 0;">&#8226; You have sudden vision changes in your good eye</li>
+        </ul>
+      </div>
+      <div class="action-box">
+        <div class="action-title">What To Do</div>
+        <ol>
+          <li>Lie down</li>
+          <li>Start your alternating nostril breathing</li>
+          <li>Cold face washer on face and neck</li>
+          <li>Re-check after 15 to 20 minutes</li>
+          <li>If still above 180, or if you have any of the symptoms listed above, call Matt or call 000</li>
+        </ol>
+        <p style="margin-top: 10px; font-size: 14px;"><strong>Important:</strong> A high number on its own, without those danger symptoms, is usually your nervous system surging.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="zone-card" style="background: #EDF2F7; border-color: #C5CED8;">
+    <div class="zone-header">
+      <div class="zone-icon" style="background: #64748B; color: white;">&#8595;</div>
+      <div>
+        <div class="zone-title" style="color: #475569;">Low Reading</div>
+        <div class="zone-range" style="color: #64748B;">Systolic below 105 &nbsp;|&nbsp; Feeling dizzy or faint</div>
+      </div>
+      <div class="expand-arrow">&#9660;</div>
+    </div>
+    <div class="zone-body">
+      <div class="zone-section">
+        <p>You had a few readings around 100 to 108. This can happen after your medication. Your clinic reading with Elaine was 100/55.</p>
+      </div>
+      <div class="action-box">
+        <div class="action-title" style="color: #475569;">What To Do</div>
+        <ol>
+          <li>Sit down, do not stand up quickly</li>
+          <li>Have a glass of water and something salty if you can</li>
+          <li>Wait for it to come up before moving around</li>
+          <li>If you feel faint or very dizzy, lie down with your feet slightly raised</li>
+          <li>Mention it to Elaine at your next visit if it keeps happening</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== HR ZONES TAB ==================== -->
+<div class="tab-panel" data-panel="hr">
+
+  <div class="zone-card zone-green expanded">
+    <div class="zone-header">
+      <div class="zone-icon">&#10003;</div>
+      <div>
+        <div class="zone-title">Normal Resting Heart Rate</div>
+        <div class="zone-range">60 to 80 beats per minute</div>
+      </div>
+      <div class="expand-arrow">&#9660;</div>
+    </div>
+    <div class="zone-body">
+      <div class="zone-section">
+        <p>93% of your cuff readings are in this range. Your average resting heart rate is 68. This is perfectly normal and healthy for you. Even if you can feel your heart beating, a rate in this range is not a problem.</p>
+      </div>
+      <div class="action-box">
+        <div class="action-title">What To Do</div>
+        <p>Nothing at all. Your heart is working normally.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="zone-card zone-yellow">
+    <div class="zone-header">
+      <div class="zone-icon">&#9679;</div>
+      <div>
+        <div class="zone-title">Heart Beating Faster</div>
+        <div class="zone-range">81 to 100 beats per minute</div>
+      </div>
+      <div class="expand-arrow">&#9660;</div>
+    </div>
+    <div class="zone-body">
+      <div class="zone-section">
+        <p>This happens when your nervous system is activated. It is normal for heart rate to go up when you are anxious, in pain, moving around, or having a heat episode. Your HeartBug confirmed there are no dangerous rhythm problems.</p>
+      </div>
+      <div class="action-box">
+        <div class="action-title">What Has Helped</div>
+        <ol>
+          <li>Sit or lie down</li>
+          <li>Your alternating nostril breathing (20 rounds)</li>
+          <li>Cold face washer on your face</li>
+          <li>It will settle. Your records show it always does</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="zone-card zone-orange">
+    <div class="zone-header">
+      <div class="zone-icon">&#9888;</div>
+      <div>
+        <div class="zone-title">Heart Rate Above 100</div>
+        <div class="zone-range">Above 100 beats per minute at rest</div>
+      </div>
+      <div class="expand-arrow">&#9660;</div>
+    </div>
+    <div class="zone-body">
+      <div class="zone-section">
+        <p>This has only happened a handful of times. On 16 February your heart went up to 117 just from bringing in the bins. This is your nervous system overreacting to small physical tasks. It is not a heart attack.</p>
+      </div>
+      <div class="action-box">
+        <div class="action-title">What To Do</div>
+        <ol>
+          <li>Stop the activity immediately</li>
+          <li>Sit or lie down</li>
+          <li>Start your alternating nostril breathing</li>
+          <li>Wait 20 to 30 minutes. It should start coming down</li>
+          <li>If it stays above 120 after 30 minutes of rest, call Matt</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="hr-low-note">
+    <strong>Slow Heart Rate (below 58)</strong>
+    You have had 7 readings below 60 (lowest was 55). This is likely from your nightly Metoprolol. It is not dangerous at these levels, but mention it to Dr Zaininger.
+  </div>
+
+  <div class="reminder-banner" style="margin-top: 4px;">
+    <strong>About your watch</strong>
+    Your watch readings can be 10 to 15 beats different from your cuff, especially when you are symptomatic. Always trust the cuff reading over the watch for making decisions.
+  </div>
+</div>
+
+<!-- ==================== MEDS TAB ==================== -->
+<div class="tab-panel" data-panel="meds">
+
+  <div class="med-ref open">
+    <div class="med-ref-header">
+      Your Medication Reference
+      <span class="expand-arrow">&#9660;</span>
+    </div>
+    <div class="med-ref-body">
+      <table class="med-table">
+        <tr><th>Medication</th><th>When</th><th>What It Does</th></tr>
+        <tr>
+          <td><strong>Amlodipine 5mg</strong></td>
+          <td>Split dose: &frac12; morning, &frac12; evening</td>
+          <td>Keeps blood vessels relaxed to lower BP over the whole day</td>
+        </tr>
+        <tr>
+          <td><strong>Metoprolol &frac14;</strong><br>(~12.5mg)</td>
+          <td>Nightly (standing dose)</td>
+          <td>Slows heart rate and calms the fight-or-flight response</td>
+        </tr>
+        <tr>
+          <td><strong>Amitriptyline &frac14;</strong></td>
+          <td>Nightly (restarted 10 Apr)</td>
+          <td>Helps calm the nervous system overnight and may reduce body stiffness and pain</td>
+        </tr>
+        <tr>
+          <td><strong>Restavit &frac18;</strong></td>
+          <td>For sleep (only if needed)</td>
+          <td>Helps you get to sleep and stay asleep</td>
+        </tr>
+        <tr>
+          <td><strong>Mersyndol &frac14;</strong></td>
+          <td>When needed</td>
+          <td>For bone pain when your muscles also feel tense</td>
+        </tr>
+        <tr>
+          <td><strong>&frac14; Panamax Co.</strong></td>
+          <td>When needed</td>
+          <td>For bone pain when your muscles are already relaxed. Contains codeine</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="med-ref">
+    <div class="med-ref-header">
+      Things That Help You (Not Medication)
+      <span class="expand-arrow">&#9660;</span>
+    </div>
+    <div class="med-ref-body">
+      <table class="med-table">
+        <tr><th>Tool</th><th>When</th></tr>
+        <tr>
+          <td><strong>Alternating nostril breathing</strong></td>
+          <td>Your main calming tool. 20 rounds. Use any time you feel activated</td>
+        </tr>
+        <tr>
+          <td><strong>Epsom salts bath</strong></td>
+          <td>Your best tool. Morning or evening. Consistently lowers BP and calms heat and heart beating</td>
+        </tr>
+        <tr>
+          <td><strong>Cold face washer</strong></td>
+          <td>During heat episodes. Place on face and neck. On 15 February you did your breathing and your hot face disappeared</td>
+        </tr>
+        <tr>
+          <td><strong>Lying flat</strong></td>
+          <td>Right side preferred. Helps settle spinal spasms and palpitations</td>
+        </tr>
+        <tr>
+          <td><strong>Feldenkrais awareness</strong></td>
+          <td>Gentle, slow movements on good days. Helps your body recalibrate. On 6 January you did eye/jaw/tongue movements in the bath and felt so much better</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="footer-note">
+  <strong>This guide was made for you, Jillian</strong>
+  Based on 133 days of your own readings (Nov 2025 to Apr 2026), your HeartBug results, and advice from your care team. Always follow the specific instructions from Elaine and Dr Zaininger if they differ from what is written here.
+  <br><br>
+  <em>Last updated: April 2026</em>
+</div>
+
+<script>
+// ===================================================================
+// COMPLETE HISTORY DATABASE
+// Every dated entry from Jillian's journal, Nov 2025 – Apr 2026
+// ===================================================================
+const HISTORY = [
+  {date:"26 Nov 2025",day:"Wed",sys:160,dia:86,hr:70,time:"9:25pm",symptoms:["heavy body"],notes:"Felt very heavy in body all day.",helped:"",outcome:""},
+  {date:"27 Nov 2025",day:"Thu",sys:119,dia:76,hr:72,time:"9:48am",symptoms:["head pressure","eye pressure","body uncomfortable","foot/ankle pain"],notes:"Feel terrible — head/eye pressure. Body uncomfortable. Left foot/ankle feels torn.",helped:"",outcome:""},
+  {date:"28 Nov 2025",day:"Fri",sys:136,dia:76,hr:69,time:"1:25pm",symptoms:["tense","jittery"],notes:"Feel a bit tense — jittery. Went for coffee, then shopping. Laid quietly on couch after.",helped:"Resting on couch",outcome:""},
+  {date:"29 Nov 2025",day:"Sat",sys:155,dia:85,hr:78,time:"8:20pm",symptoms:["heart beating","exhausted"],notes:"Could feel heart beating. Felt exhausted. Had to rest all afternoon. Had bath. Bed 8pm.",helped:"Bath, rest",outcome:""},
+  {date:"30 Nov 2025",day:"Sun",sys:142,dia:83,hr:84,time:"11am",symptoms:["head pressure","warm neck","no energy","frightened"],notes:"Stayed in bed. Pressure in head. Warm in neck (vagal). No energy — quite frightening. Rang Y for chat.",helped:"Staying in bed, talking to someone",outcome:""},
+  {date:"2 Dec 2025",day:"Tue",sys:123,dia:72,hr:76,time:"10:30am",symptoms:["warm face"],notes:"Warm face/neck. Slept 10pm–5am. Very slow start.",helped:"Quiet morning routine",outcome:""},
+  {date:"3 Dec 2025",day:"Wed",sys:133,dia:77,hr:69,time:"4:15pm",symptoms:["heart beating","freezing cold","fragile"],notes:"No amitriptyline last night. Woke with heart beating — did special breathing until it calmed at 7am. Freezing cold all morning, warm/hot by 2pm.",helped:"Breathing exercises calmed heart by 7am",outcome:"Heart calmed with breathing"},
+  {date:"6 Dec 2025",day:"Sat",sys:131,dia:80,hr:73,time:"11am",symptoms:["fragile","tremors"],notes:"Felt same fragility. Could hardly feel heart but felt tremors. Took BB 12:30, felt a little better.",helped:"Beta blocker",outcome:"Felt a little better after BB"},
+  {date:"7 Dec 2025",day:"Sun",sys:170,dia:88,hr:72,time:"5:30pm",symptoms:["heart beating","hot","high BP"],notes:"Woke feeling clear-headed — best day in a while. But after telling a story to Amanda got stressed. Heart beating and feeling hot. BP 170/88.",helped:"BB + 4/8 breathing",outcome:"Settled somewhat but continued through the night"},
+  {date:"8 Dec 2025",day:"Mon",sys:147,dia:82,hr:88,time:"10:30am",symptoms:["warm"],notes:"Still heat this morning. Took BB after breakfast. Feeling warm not hot, taking it easy.",helped:"BB, taking it easy",outcome:""},
+  {date:"9 Dec 2025",day:"Tue",sys:141,dia:86,hr:80,time:"4:30pm",symptoms:[],notes:"Slept 8.5 hrs — felt much improved. Didn't take BB today because not feeling heart beating.",helped:"Good sleep (8.5 hrs)",outcome:"Felt much improved"},
+  {date:"10 Dec 2025",day:"Wed",sys:123,dia:76,hr:60,time:"1pm",symptoms:["spasm"],notes:"Slept 8.5 hrs but uncomfortable. Had to call Yannbyrd — was so in spasm sitting on bed edge, thought might pass out. Later had bath with Epsom salts — much better but still painful.",helped:"Epsom salts bath — much better. Yannbyrd helped.",outcome:"Much better after bath, still some pain"},
+  {date:"11 Dec 2025",day:"Thu",sys:119,dia:68,hr:65,time:"1pm",symptoms:["wafty","spine unstable","skull pressure"],notes:"Spine malleable and quite unstable. Pressure in skull bones. Felt wafty. However got better as day went on.",helped:"Time — got better as day went on",outcome:"Improved through the day"},
+  {date:"12 Dec 2025",day:"Fri",sys:160,dia:82,hr:65,time:"4pm",symptoms:[],notes:"3rd night of good sleep — felt quite good. Washed hair. Max came and did some hands-on work.",helped:"Good sleep, hands-on treatment from Max",outcome:"Felt quite good"},
+  {date:"16 Dec 2025",day:"Tue",sys:139,dia:79,hr:68,time:"9pm",symptoms:["heart beating","exhausted"],notes:"Woke feeling absolutely exhausted after heart beating constantly all night. Took BB 10pm and 4am. Had bath 45 mins. Went to bed very relaxed — no heart beating.",helped:"Bath for 45 minutes",outcome:"Very relaxed after bath — no heart beating"},
+  {date:"17 Dec 2025",day:"Wed",sys:121,dia:69,hr:64,time:"1pm",symptoms:[],notes:"Slept 9 hours and woke up and felt terrific!",helped:"9 hours sleep",outcome:"Felt terrific"},
+  {date:"18 Dec 2025",day:"Thu",sys:115,dia:67,hr:67,time:"4:10pm",symptoms:["ribs restricting breathing"],notes:"LHS ribs prominent — restricts breathing. But generally ok day. Got haircut, shopped.",helped:"Shower, normal activities",outcome:"Managed well"},
+  {date:"20 Dec 2025",day:"Sat",sys:140,dia:76,hr:63,time:"9:30am",symptoms:["bone pain","hot face","exhausted"],notes:"Woke 3am with body very painful (bones). Like pain when having spasms. Hot face. Had to lie down 20 mins after standing. Got better as day went on.",helped:"Rest, got better through day. Bath + Panadeine at 5pm. Mersyndol at bedtime.",outcome:"Got better as day went on"},
+  {date:"22 Dec 2025",day:"Mon",sys:132,dia:73,hr:58,time:"1pm",symptoms:["heart beating","hot","awful"],notes:"Woke with heart beating and hot. Felt awful. Decided to have bath — didn't get there until 1pm. Felt much better after bath.",helped:"Bath",outcome:"Felt much better after bath"},
+  {date:"23 Dec 2025",day:"Tue",sys:105,dia:67,hr:74,time:"11:45am",symptoms:["heart beating on waking","hot","stiff"],notes:"Woke 6am with head beating, hot and stiff. Laid quietly.",helped:"Lying quietly",outcome:""},
+  {date:"27 Dec 2025",day:"Sat",sys:126,dia:67,hr:68,time:"1pm",symptoms:["foggy head"],notes:"Slept soundly until 7:30am. Head still foggy but feel very quiet/calm.",helped:"Good sleep",outcome:"Quiet and calm"},
+  {date:"28 Dec 2025",day:"Sun",sys:152,dia:78,hr:79,time:"10:30am",symptoms:["faint feeling"],notes:"Was sitting eating breakfast and felt as if going to pass out. Quickly took BP — quite high. May have accidentally doubled BP medication the night before.",helped:"",outcome:""},
+  {date:"30 Dec 2025",day:"Tue",sys:114,dia:67,hr:62,time:"1pm",symptoms:[],notes:"Great day. Head was clear and felt wonderful. Made chocolate sponge and shared with friends. So happy.",helped:"Good day — everything clicked",outcome:"Felt wonderful. So happy."},
+  {date:"31 Dec 2025",day:"Wed",sys:120,dia:75,hr:64,time:"4:30pm",symptoms:["hot","tired"],notes:"Feel awful again. Feeling hot on/off. So tired.",helped:"",outcome:""},
+  {date:"1 Jan 2026",day:"Thu",sys:134,dia:77,hr:77,time:"1pm",symptoms:["heavy body","hot"],notes:"Woke very hot — cold face washer on face/neck. Discovered heaviness was from lower ribs and diaphragm — stretched in all directions. What a relief! Heat under control.",helped:"Stretching ribs/diaphragm in all directions. Cold face washer.",outcome:"What a relief — felt so much better"},
+  {date:"2 Jan 2026",day:"Fri",sys:143,dia:72,hr:66,time:"5:30pm",symptoms:["hot cheeks"],notes:"Slept 10:30–7:30. Feeling good. Did jobs, had lunch, few bits of garden clearing. Bit hot in cheeks.",helped:"Kept busy with gentle activities",outcome:"Feeling good"},
+  {date:"3 Jan 2026",day:"Sat",sys:139,dia:77,hr:64,time:"8pm",symptoms:["skull pressure","hot","painful upper back"],notes:"Pressure in bones of skull — they are moving? Hot on/off all day. Upper back painful. Took Panadeine.",helped:"Bath at 5:45",outcome:""},
+  {date:"4 Jan 2026",day:"Sun",sys:128,dia:67,hr:66,time:"4:30pm",symptoms:["spine pain","spine peculiar shape"],notes:"Woke on LHS — spine in peculiar shape. Took 30 mins of moving to stand up. Did all the moves to be able to walk. Made tea to stay in control. Bath 5:30.",helped:"Slow minute movements (30 mins). Bath 5:30. Felt quite good.",outcome:"Felt quite good after bath"},
+  {date:"5 Jan 2026",day:"Mon",sys:108,dia:68,hr:71,time:"11:30am",symptoms:["ribs tight","wafty","heart beating at night"],notes:"Spine holding ribs tight — hard to stand up tall. Felt vague/wafty. Terrible night — heart beating from positioning.",helped:"",outcome:""},
+  {date:"6 Jan 2026",day:"Tue",sys:124,dia:74,hr:63,time:"12:15pm",symptoms:["fragile","head indentations","rigid T1-5"],notes:"Very fragile today, snail pace. Head indentations moving. T1-5/6 rigid. Bath 6pm did Feldenkrais moves with eyes/jaw/tongue. Felt so much better after bath.",helped:"Bath + Feldenkrais eye/jaw/tongue movements",outcome:"Felt so much better after bath. 9 hrs sleep. Feel good next day."},
+  {date:"7 Jan 2026",day:"Wed",sys:108,dia:62,hr:68,time:"11:30am",symptoms:["hot"],notes:"Got hot around 3pm. Bath at 6pm — hot subsided.",helped:"Bath",outcome:"Heat subsided"},
+  {date:"8 Jan 2026",day:"Thu",sys:121,dia:69,hr:63,time:"1:30pm",symptoms:["fragmented sleep","chest heavy"],notes:"Woke every hour through night. Chest felt heavy from tight muscles due to lack of sleep. Cool bath and dinner helped.",helped:"Cool bath. Felt better after bath.",outcome:"Felt better after bath"},
+  {date:"9 Jan 2026",day:"Fri",sys:132,dia:72,hr:61,time:"12:30pm",symptoms:[],notes:"Woke not feeling too bad. Gradually started feeling quite good. Amanda came for chat. Cool bath. Felt good.",helped:"Gradual recovery, social contact, bath",outcome:"Felt good. Slept 10–6am."},
+  {date:"11 Jan 2026",day:"Sun",sys:156,dia:81,hr:76,time:"12:30pm",symptoms:["hot","aches","skull jammed","awful"],notes:"Felt really awful. Really hot (vagus). Everything out of place. Rang Max — she came and treated me at lunchtime. What a relief! Bath after.",helped:"Max treatment + bath",outcome:"What a relief"},
+  {date:"12 Jan 2026",day:"Mon",sys:121,dia:66,hr:70,time:"3:30pm",symptoms:["heart racing low beats"],notes:"Heart racing (but low beats — only 59). Got up and felt amazing — no aches or pains anywhere! But got hot after making cake (vagus).",helped:"Treatment from Max previous day",outcome:"Felt amazing — no aches or pains anywhere"},
+  {date:"14 Jan 2026",day:"Wed",sys:126,dia:73,hr:67,time:"3pm",symptoms:[],notes:"Body releasing muscles — amazing. No pressure in head. Back feels light not dragging down. Wow, felt much better.",helped:"Body releasing overnight, gentle routine",outcome:"Felt much better — no pressure in head"},
+  {date:"15 Jan 2026",day:"Thu",sys:111,dia:67,hr:65,time:"12:30pm",symptoms:["skull pressure","hot"],notes:"Chest lighter. Pressure in forehead/upper neck. Had 2 hours of feeling amazing (8-10pm). Stayed hot all day on/off.",helped:"Bath 5:30",outcome:"2 hours of feeling amazing in evening"},
+  {date:"19 Jan 2026",day:"Mon",sys:117,dia:69,hr:70,time:"11am",symptoms:[],notes:"Went to Max's to see Merv. Did work together. Felt ok but tense because in work mode.",helped:"Being productive",outcome:"Felt ok"},
+  {date:"21 Jan 2026",day:"Wed",sys:124,dia:70,hr:64,time:"12:45pm",symptoms:[],notes:"Slept well — 8.15 hrs. Relaxed. Talked with Matt.",helped:"8.15 hrs sleep",outcome:"Relaxed, good day"},
+  {date:"22 Jan 2026",day:"Thu",sys:115,dia:71,hr:70,time:"12:30pm",symptoms:[],notes:"Good day. Picked up books. Sushi with Max. Feldenkrais work together. 2,500 steps.",helped:"Active gentle day, Feldenkrais",outcome:""},
+  {date:"25 Jan 2026",day:"Sun",sys:165,dia:95,hr:77,time:"9pm",symptoms:["fragile","hot head","pain neck/skull","cold feet"],notes:"Very fragile. Very hot in head, neck, face all day. Took 2x Panadol — no relief. Cold face washer better. Bath at 5:15 — immediately felt different (heat disappeared). Relaxed for 30 mins in bath. Felt much better.",helped:"Cold face washer. Bath — immediately felt different, heat disappeared.",outcome:"Felt much better after bath. Heat disappeared."},
+  {date:"26 Jan 2026",day:"Mon",sys:143,dia:78,hr:76,time:"5pm",symptoms:["stiff","painful"],notes:"Slept 7.5 hrs. Felt stiff and painful on waking. Did movements to get rid of pain — felt better.",helped:"Movements on waking",outcome:"Felt better after movements"},
+  {date:"27 Jan 2026",day:"Tue",sys:121,dia:72,hr:68,time:"4:30pm",symptoms:["pain thoracic","no energy"],notes:"Pain on top 4 thoracic vertebrae into neck/skull. Sapped energy. Got beautiful meals.",helped:"Good nutrition, rest",outcome:""},
+  {date:"28 Jan 2026",day:"Wed",sys:144,dia:83,hr:74,time:"8:30am",symptoms:["pain"],notes:"Jillian noted: 'Pain = high BP.' Same thoracic pain.",helped:"",outcome:""},
+  {date:"29 Jan 2026",day:"Thu",sys:129,dia:66,hr:57,time:"4pm",symptoms:["fragile"],notes:"7 hrs sleep. Still a little fragile but got better as day went on. Bath 6pm. Fish/veges dinner.",helped:"Time — got better through day. Bath.",outcome:"Got better as day went on"},
+  {date:"1 Feb 2026",day:"Sun",sys:130,dia:80,hr:70,time:"8:30pm",symptoms:["head pressure","ankle tingling","spine pain","heavy head"],notes:"Pressure in head and tingling/numbness in ankles. Pain upper spine. Head felt like it weighed a ton. Bath 5:30 — felt better after.",helped:"Bath",outcome:"Felt better after bath"},
+  {date:"2 Feb 2026",day:"Mon",sys:114,dia:71,hr:65,time:"5pm",symptoms:[],notes:"Eye specialist — all good. Bath — body felt looser. Started to feel hungry — unusual for a few weeks. Quite chipper.",helped:"Bath — body felt looser",outcome:"Quite chipper"},
+  {date:"3 Feb 2026",day:"Tue",sys:110,dia:68,hr:64,time:"11am",symptoms:[],notes:"Did Feldenkrais study group — very relaxing. Slept soundly almost 9 hrs. Body much better — relaxed.",helped:"Feldenkrais group, 9 hrs sleep",outcome:"Body much better, relaxed"},
+  {date:"7 Feb 2026",day:"Sat",sys:122,dia:68,hr:67,time:"2:45pm",symptoms:[],notes:"Feeling good. Nearly 7 hrs sleep. Shopping, Amanda chat, Bunnings. Bath — felt relaxed.",helped:"Good sleep, active day, bath",outcome:"Feeling good, relaxed after bath"},
+  {date:"8 Feb 2026",day:"Sun",sys:153,dia:81,hr:62,time:"5pm",symptoms:["fragile","dry mouth","spine into skull pressure"],notes:"Slept 6.5 hrs. Felt shocking — hardly able to walk. Had to stay in bed. Spine going into skull. Pressure forehead to mid skull.",helped:"Bed rest all day. Bath 5:30. Got dinner.",outcome:"Still frail but managed"},
+  {date:"9 Feb 2026",day:"Mon",sys:134,dia:73,hr:66,time:"2pm",symptoms:[],notes:"Nearly 7 hrs sleep. Breakfast, shower, lunch. Dentist all good. Bath. Fish dinner.",helped:"Routine day, bath",outcome:""},
+  {date:"12 Feb 2026",day:"Thu",sys:113,dia:64,hr:67,time:"12:30pm",symptoms:["spine pain","diarrhoea"],notes:"7 hrs sleep. Pain in spine on waking — did lots of minute moves, so much better. Had diarrhoea. Bath after dinner.",helped:"Minute moves on waking — so much better",outcome:"Much better after minute movements"},
+  {date:"14 Feb 2026",day:"Sat",sys:113,dia:63,hr:62,time:"3:30pm",symptoms:["exhausted","body released patterns"],notes:"Body had let go of so many tight patterns it was exhausted. Bath to revive. Woke 1am stiff as post — elevated on back, spine began to let go after an hour.",helped:"Bath. Lying elevated on back for an hour — spine let go.",outcome:"Spine relaxed after an hour on back"},
+  {date:"15 Feb 2026",day:"Sun",sys:122,dia:66,hr:68,time:"4:30pm",symptoms:["hot face"],notes:"At 11:30 laid on couch and did alternating nostril breathing — hot face/head disappeared! Been sort of ok since then.",helped:"Alternating nostril breathing — hot face disappeared",outcome:"Hot face/head disappeared"},
+  {date:"16 Feb 2026",day:"Mon",sys:132,dia:78,hr:71,time:"4:45pm",symptoms:["dizzy","spine moving","skull","heart racing","pain"],notes:"Woke 3am with pain in back — turned to dizziness from spine moving around. By 8am stuck and painful. Heart raced to 117 from bringing bins in. Took Mersyndol — pain shifted from head/neck to mid-spine.",helped:"Mersyndol shifted pain. Bath. Got 8 hrs sleep that night!",outcome:"8 hrs sleep that night"},
+  {date:"17 Feb 2026",day:"Tue",sys:121,dia:71,hr:65,time:"",symptoms:[],notes:"Felt really good. Got ready for study group.",helped:"Good previous night's sleep",outcome:"Felt really good"},
+  {date:"20 Feb 2026",day:"Fri",sys:110,dia:64,hr:67,time:"12pm",symptoms:[],notes:"Worked with balancing body for 2 hrs. Muscles released about 5pm — upper back/neck. No dermatitis. Eyes cleared. Completely different — no out of kilter.",helped:"2 hrs of body balancing work. Muscles released at 5pm.",outcome:"Completely different. No out of kilter."},
+  {date:"21 Feb 2026",day:"Sat",sys:142,dia:80,hr:64,time:"9:30pm",symptoms:["spasms","out of whack"],notes:"Had spasms for 2 hours at 2am. Body completely out of whack. Max came and gave treatment at 3pm.",helped:"Max treatment",outcome:"Felt spine wasn't as out after treatment"},
+  {date:"27 Feb 2026",day:"Fri",sys:143,dia:82,hr:76,time:"5:45pm",symptoms:["heart beating"],notes:"Only 5 hrs sleep. Heart beating most of the day. But slept 9.24 hrs that night — yippee! Body soft and supple next morning.",helped:"Long sleep (9.24 hrs)",outcome:"9.24 hrs sleep — body soft and supple next morning"},
+  {date:"1 Mar 2026",day:"Sun",sys:160,dia:81,hr:68,time:"5:30pm",symptoms:["lopsided","exhausted"],notes:"Felt very lopsided. Acupuncture with Dr Im Quah-Smith. HB shot up to 158 between 4-5pm (watch). Felt exhausted/strange after dinner — had to stop and lie on couch without moving.",helped:"Acupuncture. Lying completely still on couch.",outcome:""},
+  {date:"3 Mar 2026",day:"Tue",sys:167,dia:92,hr:75,time:"10am",symptoms:["exhausted","hot","buzzing"],notes:"Multiple readings through day: 167/92, 160/89, 149/84, 160/90. Body went into buzzing all through until 10:30am. Couldn't do anything all day. Felt ghastly.",helped:"Rest. Bath after dinner.",outcome:"Still felt hot and unwell at midnight"},
+  {date:"4 Mar 2026",day:"Wed",sys:170,dia:94,hr:null,time:"7:45am",symptoms:["spasm","buzzing head to toe","hot"],notes:"Peak crisis. Woke stuck with spine spasmed and body buzzing from head to toe. Took 1.5 hrs to get chest moving. Very red and hot. Took extra Amlodipine + BB. BP came down: 142/77 by 11am, 120/71 by 5:30pm, 117/72 by 8:15pm.",helped:"Extra medication. Ginger tea. Cereal. Stayed in bed until 1:30pm. Bath — so good, got rid of pain and stiffness.",outcome:"Came down from 170 to 117 over the day. Bath got rid of pain."},
+  {date:"5 Mar 2026",day:"Thu",sys:122,dia:75,hr:73,time:"1:45pm",symptoms:["fragile","heat"],notes:"Body much better today after yesterday. But felt quiet/fragile. LHS ribs stuck. Heat came on about 5pm.",helped:"Rest",outcome:"Body much better than previous day"},
+  {date:"7 Mar 2026",day:"Sat",sys:112,dia:66,hr:67,time:"12:30pm",symptoms:["spine stiff","double vision","chest tight","hot"],notes:"Woke and spine stiff/out-of-kilter. Did eye movements with tongue-jaw. Very hot. Chest tightening from rigid spine.",helped:"Eye movements with tongue/jaw. Bath.",outcome:""},
+  {date:"8 Mar 2026",day:"Sun",sys:166,dia:89,hr:74,time:"9:10pm",symptoms:["hot","miserable"],notes:"Felt hot and miserable all day. Stayed in bed. Put chicken in oven for protein. Bath. Took extra BP tablet. Slept 8 hrs.",helped:"Bed rest. Bath. Extra BP tablet.",outcome:"Slept 8 hrs. Woke up Monday with spine completely different — quite supple."},
+  {date:"9 Mar 2026",day:"Mon",sys:123,dia:69,hr:69,time:"3pm",symptoms:[],notes:"Stayed quiet in morning. Went for tea in Gordon with Amanda. Read the Claude report at 5pm.",helped:"Previous day's rest and 8 hrs sleep",outcome:"Calm day"},
+  {date:"10 Mar 2026",day:"Tue",sys:117,dia:73,hr:74,time:"1pm",symptoms:["buzzing","fragile","hot"],notes:"Body went into buzzing all through until 10:30am. Fragile, hot on/off. Bath at 12pm. Later BP went up to 156/93 at night, still felt hot.",helped:"Bath at noon",outcome:""},
+  {date:"11 Mar 2026",day:"Wed",sys:163,dia:92,hr:71,time:"5:15pm",symptoms:["hot","fragile"],notes:"Very hot again at 4:50pm. Tried to reach Elaine. BP 163/92. Had bath, dinner. Heat diminished. Thank goodness.",helped:"Bath. Heat diminished afterwards.",outcome:"Heat diminished after bath. Thank goodness."},
+  {date:"12 Mar 2026",day:"Thu",sys:109,dia:65,hr:61,time:"12:30pm",symptoms:["spine supple/moving"],notes:"Slept 8 hours. Body very supple — able to adjust everything with minute functional moves from head to toes. Body still moving around.",helped:"8 hours sleep. Minute functional moves.",outcome:"Supple, able to adjust"},
+  {date:"14 Mar 2026",day:"Sat",sys:126,dia:72,hr:64,time:"9:30pm",symptoms:[],notes:"4 hrs sleep only but felt a little better after bath. No heat. Head clearer. Feet not as numb. Ankle/feet muscles much looser.",helped:"Bath — really good. No heat, head clearer, feet improved.",outcome:"Felt a little better. No heat. Head clearer."},
+  {date:"16 Mar 2026",day:"Mon",sys:144,dia:78,hr:64,time:"9:30pm",symptoms:["spine supple/moving","hot"],notes:"9 hours sleep. Spine so supple it was moving all over. Had to stay quiet. Later felt hot. By 6:30am next morning took BP medication early — felt it working.",helped:"9 hours sleep. Early BP medication.",outcome:""},
+  {date:"17 Mar 2026",day:"Tue",sys:129,dia:69,hr:58,time:"12pm",symptoms:["hot","no energy"],notes:"Hot most of day — just there. Improved before bed. Cooked plums. Slept 7.20 mins — felt better.",helped:"Time — improved before bed",outcome:"Felt better next day"},
+  {date:"18 Mar 2026",day:"Wed",sys:127,dia:69,hr:55,time:"12:45pm",symptoms:["heart racing on waking"],notes:"Woke with racing heartbeat (only 54 bpm) for over 30 mins. Breathing calmly, less in than out. At 4:30 had pressure in head and hot/aching. Bath helped. Then did gentle nervous system brushing movements on work table for 25 mins.",helped:"Calm breathing. Bath. 25 mins of nervous system brushing on work table.",outcome:""},
+  {date:"19 Mar 2026",day:"Thu",sys:140,dia:73,hr:64,time:"4:30pm",symptoms:[],notes:"Woke and body had no sharp edges — smooth and moving together. Clear brain. Felt marvellous standing up tall. Changed sheets, did jobs, had dinner. Laid on work table — no pain this time. Slept well.",helped:"Previous day's work table session. Good sleep.",outcome:"Felt marvellous. Clear brain. No sharp edges."},
+  {date:"21 Mar 2026",day:"Sat",sys:119,dia:72,hr:68,time:"12pm",symptoms:[],notes:"7 hrs sleep. Huge breakfast. Showered, starting to come to.",helped:"Good sleep",outcome:""},
+  {date:"22 Mar 2026",day:"Sun",sys:112,dia:64,hr:63,time:"2:30pm",symptoms:[],notes:"7 hrs sleep. Huge breakfast. Showered, coming to.",helped:"Good sleep",outcome:""},
+  {date:"3 Apr 2026",day:"Fri",sys:115,dia:67,hr:69,time:"4pm",symptoms:["hot head","cold feet","spine pain","head pressure"],notes:"Haven't been feeling well last few weeks. Hot head/cold feet, pain in spine, pressure in head. No good days. But last week felt good from lunchtime until bed — like a switch on/off.",helped:"",outcome:"Switch-like improvement — felt good from lunchtime one day"},
+  {date:"4 Apr 2026",day:"Sat",sys:126,dia:69,hr:67,time:"5:30pm",symptoms:["fragile","head pressure","muscles moving","breathing difficulty"],notes:"Fragile with head pressure. Did shopping. Woke 4am — muscles moving all around. Could feel effort for ribcage to expand. Thought might stop breathing. Had to concentrate to walk to loo one step at a time.",helped:"Two baths during the day. Shopping gave structure.",outcome:""},
+  {date:"5 Apr 2026",day:"Sun",sys:144,dia:73,hr:62,time:"2:30pm",symptoms:["head pressure","muscles swaying"],notes:"Pressure in head, muscles still moving/swaying. Every step had to stop and get muscles to hold. Felt awful. Had bath. Ear massage cleared RHS ear — less pressure for several hours. Chatted to Matt. By 5pm anxious about another night. Pete came and stayed. Slept peacefully 7.40 hrs.",helped:"Bath. Ear massage (cleared ear, reduced pressure). Having someone stay overnight — slept peacefully 7.40 hrs.",outcome:"Slept peacefully for 7.40 hrs with Pete there"},
+  {date:"6 Apr 2026",day:"Mon",sys:121,dia:63,hr:57,time:"1:30pm",symptoms:["fatigue","hot","vibrating"],notes:"Quiet day. At 5pm suddenly so fatigued had to lie down immediately. Pete stayed again. Slept fitfully 4.48 hrs. Woke 6:30am HOT and vibrating. Took BP med early — it took 25 mins to calm system.",helped:"Pete staying. Early BP medication — took 25 mins to calm system.",outcome:"System calmed after 25 mins of early medication"},
+  {date:"7 Apr 2026",day:"Tue",sys:156,dia:89,hr:79,time:"7:50am",symptoms:["hot","heart beating","pain"],notes:"Last journal entry. Felt hot, heart beating, pain and discomfort on waking. Elaine rang and said blood test + find good cardiologist.",helped:"Matt arrived. Sushi together.",outcome:"Elaine: blood test + cardiologist"},
+];
+
+// ===================================================================
+// HELPER FUNCTIONS
+// ===================================================================
+
+function getZone(sys, dia) {
+  if (sys >= 180 || dia >= 110) return 'red';
+  if (sys >= 156 || dia >= 91) return 'orange';
+  if (sys >= 136 || dia >= 81) return 'yellow';
+  if (sys < 105) return 'low';
+  return 'green';
+}
+
+function getZoneInfo(zone) {
+  const zones = {
+    green: {
+      name: 'Calm Zone',
+      color: 'var(--green)',
+      bg: 'var(--green-bg)',
+      message: 'These are good numbers for you. About half of all your readings over the past 5 months have been in this range. Your heart is doing its job beautifully and your nervous system is settled. Nothing to worry about at all — go about your day and enjoy how this feels.'
+    },
+    yellow: {
+      name: 'Watch Zone',
+      color: 'var(--yellow)',
+      bg: 'var(--yellow-bg)',
+      message: 'A bit elevated but nothing to worry about. About a third of your readings are in this range — it is very common for you, especially in the afternoon, after poor sleep, or on days with more pain. Your nervous system is a bit activated, which is uncomfortable but not dangerous. Your breathing, a cold face washer, or a warm Epsom salts bath have all helped settle this before. Be gentle with yourself and let it come down in its own time.'
+    },
+    orange: {
+      name: 'Active Zone',
+      color: 'var(--orange)',
+      bg: 'var(--orange-bg)',
+      message: 'Your nervous system has fired up more strongly. You have been here before and it has always come back down. About 17% of your readings have been in this range — it is a surge, not a crisis. Your highest ever reading was 170/94 on 4 March, and that came down to 120/71 by 5:30pm the same day with rest, breathing, and a bath. Lie down, start your alternating nostril breathing, and be patient with your body. It knows how to come back from here.'
+    },
+    red: {
+      name: 'Get Help Zone',
+      color: 'var(--red)',
+      bg: 'var(--red-bg)',
+      message: 'This is higher than your usual range. Stay lying down and start your alternating nostril breathing straight away. Put a cold face washer on your face and neck. Re-check after 15 to 20 minutes. If it stays above 180, or you have a sudden severe headache, chest pain, trouble speaking, or vision changes in your good eye — call Matt or call 000. A high number on its own, without those danger symptoms, is usually your nervous system surging.'
+    },
+    low: {
+      name: 'Low Reading',
+      color: '#475569',
+      bg: '#EDF2F7',
+      message: 'This is lower than your usual range. This can happen after your Amlodipine. Do not stand up quickly. Have a glass of water and something salty if you can. Wait for it to come back up before moving around. If you feel faint or very dizzy, lie down with your feet slightly raised. Mention it to Elaine if it keeps happening.'
+    }
+  };
+  return zones[zone];
+}
+
+function getHRNote(hr) {
+  if (!hr) return '';
+  if (hr > 100) {
+    return '<div style="margin-top:12px;padding:12px 14px;background:var(--orange-bg);border-radius:8px;border:1px solid var(--orange-border);font-size:14px;line-height:1.5;">' +
+      '<strong style="color:var(--orange);">Heart rate ' + hr + ' bpm — faster than usual</strong><br>' +
+      'This has happened before. On 16 February your heart went to 117 just from bringing in the bins. Sit or lie down, start your breathing, and let it settle. It always does.' +
+    '</div>';
+  } else if (hr < 55) {
+    return '<div style="margin-top:12px;padding:12px 14px;background:#EDE8F5;border-radius:8px;border:1px solid #C9BEE0;font-size:14px;line-height:1.5;">' +
+      '<strong style="color:#4A3A6B;">Heart rate ' + hr + ' bpm — on the slow side</strong><br>' +
+      'This is likely from the Metoprolol. Not dangerous at this level. If you feel very sluggish or dizzy, mention it to Elaine.' +
+    '</div>';
+  } else if (hr >= 55 && hr <= 80) {
+    return '<div style="margin-top:12px;padding:12px 14px;background:var(--green-bg);border-radius:8px;border:1px solid var(--green-border);font-size:14px;">' +
+      '<strong style="color:var(--green);">Heart rate ' + hr + ' bpm — perfectly normal for you.</strong>' +
+    '</div>';
+  } else {
+    return '<div style="margin-top:12px;padding:12px 14px;background:var(--yellow-bg);border-radius:8px;border:1px solid var(--yellow-border);font-size:14px;">' +
+      '<strong style="color:var(--yellow);">Heart rate ' + hr + ' bpm — a bit elevated but not a concern.</strong> Your nervous system is a bit activated. Breathing will help.' +
+    '</div>';
+  }
+}
+
+// ===================================================================
+// ALL EVENT LISTENERS — iOS SAFE (no inline onclick)
+// ===================================================================
+document.addEventListener('DOMContentLoaded', function() {
+
+  // ----- TABS -----
+  var tabs = document.querySelectorAll('.tab');
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].addEventListener('click', function() {
+      var allTabs = document.querySelectorAll('.tab');
+      var allPanels = document.querySelectorAll('.tab-panel');
+      for (var j = 0; j < allTabs.length; j++) allTabs[j].classList.remove('active');
+      for (var j = 0; j < allPanels.length; j++) allPanels[j].classList.remove('active');
+      this.classList.add('active');
+      document.querySelector('[data-panel="' + this.getAttribute('data-tab') + '"]').classList.add('active');
+    });
+  }
+
+  // ----- CHECK READING BUTTONS -----
+  var checkBtn1 = document.getElementById('checkBtn1');
+  if (checkBtn1) {
+    checkBtn1.addEventListener('click', function() {
+      var sys = parseInt(document.getElementById('sysInput').value);
+      var dia = parseInt(document.getElementById('diaInput').value);
+      var hr = parseInt(document.getElementById('hrInput').value) || null;
+      var box = document.getElementById('resultBox');
+      doCheck(sys, dia, hr, box);
+    });
+  }
+
+  var checkBtn2 = document.getElementById('checkBtn2');
+  if (checkBtn2) {
+    checkBtn2.addEventListener('click', function() {
+      var sys = parseInt(document.getElementById('sysInput2').value);
+      var dia = parseInt(document.getElementById('diaInput2').value);
+      var hr = parseInt(document.getElementById('hrInput2').value) || null;
+      var box = document.getElementById('resultBox2');
+      doCheck(sys, dia, hr, box);
+    });
+  }
+
+  function doCheck(sys, dia, hr, box) {
+    if (!sys || !dia) {
+      box.className = 'result-box show';
+      box.style.background = '#F0EDE6';
+      box.innerHTML = '<p>Please enter at least your top and bottom numbers from the cuff.</p>';
+      return;
+    }
+    var zone = getZone(sys, dia);
+    var zoneInfo = getZoneInfo(zone);
+    var hrNote = getHRNote(hr);
+    box.className = 'result-box show';
+    box.style.background = zoneInfo.bg;
+    box.innerHTML = '<h3 style="color:' + zoneInfo.color + '">' + zoneInfo.name + '</h3>' +
+      '<p style="font-size:14px;color:var(--text-light);margin-bottom:6px;">BP: ' + sys + '/' + dia + (hr ? ' · HR: ' + hr : '') + '</p>' +
+      '<p>' + zoneInfo.message + '</p>' +
+      hrNote;
+    box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // ----- SYMPTOM ROWS -----
+  var symptomRows = document.querySelectorAll('.symptom-row');
+  for (var i = 0; i < symptomRows.length; i++) {
+    symptomRows[i].addEventListener('click', function(e) {
+      // Don't toggle if they tapped the timing button or checkbox directly
+      if (e.target.classList.contains('symptom-timing') || e.target.type === 'checkbox') return;
+      var cb = this.querySelector('input[type="checkbox"]');
+      cb.checked = !cb.checked;
+      this.classList.toggle('checked', cb.checked);
+    });
+  }
+
+  // Checkboxes themselves
+  var symCBs = document.querySelectorAll('.sym-cb');
+  for (var i = 0; i < symCBs.length; i++) {
+    symCBs[i].addEventListener('change', function() {
+      this.closest('.symptom-row').classList.toggle('checked', this.checked);
+    });
+  }
+
+  // ----- TIMING BUTTONS (now/earlier) -----
+  var timingBtns = document.querySelectorAll('.symptom-timing');
+  for (var i = 0; i < timingBtns.length; i++) {
+    timingBtns[i].addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (this.textContent === 'now') {
+        this.textContent = 'earlier';
+        this.classList.add('earlier');
+      } else {
+        this.textContent = 'now';
+        this.classList.remove('earlier');
+      }
+    });
+  }
+
+  // ----- RESET SYMPTOMS -----
+  var resetBtn = document.getElementById('resetSymptomsBtn');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', function() {
+      var cbs = document.querySelectorAll('.sym-cb');
+      for (var i = 0; i < cbs.length; i++) {
+        cbs[i].checked = false;
+        cbs[i].closest('.symptom-row').classList.remove('checked');
+      }
+      var btns = document.querySelectorAll('.symptom-timing');
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].textContent = 'now';
+        btns[i].classList.remove('earlier');
+      }
+    });
+  }
+
+  // ----- ZONE CARDS -----
+  var zoneCards = document.querySelectorAll('.zone-card');
+  for (var i = 0; i < zoneCards.length; i++) {
+    // Set initial display
+    var body = zoneCards[i].querySelector('.zone-body');
+    if (body) {
+      body.style.display = zoneCards[i].classList.contains('expanded') ? 'block' : 'none';
+    }
+    // Click handler
+    zoneCards[i].addEventListener('click', function() {
+      this.classList.toggle('expanded');
+      var b = this.querySelector('.zone-body');
+      if (b) {
+        b.style.display = this.classList.contains('expanded') ? 'block' : 'none';
+      }
+    });
+  }
+
+  // ----- MED REF HEADERS -----
+  var medHeaders = document.querySelectorAll('.med-ref-header');
+  for (var i = 0; i < medHeaders.length; i++) {
+    medHeaders[i].addEventListener('click', function() {
+      this.parentElement.classList.toggle('open');
+    });
+  }
+
+  // ----- FEELING BUTTONS (1-10) -----
+  var feelingBtns = document.querySelectorAll('.feeling-btn');
+  for (var i = 0; i < feelingBtns.length; i++) {
+    feelingBtns[i].addEventListener('click', function() {
+      // Deselect all
+      var all = document.querySelectorAll('.feeling-btn');
+      for (var j = 0; j < all.length; j++) all[j].classList.remove('selected');
+      // Select this one
+      this.classList.add('selected');
+    });
+  }
+
+  // ----- MED ROWS -----
+  var medRows = document.querySelectorAll('.med-row');
+  for (var i = 0; i < medRows.length; i++) {
+    medRows[i].addEventListener('click', function(e) {
+      if (e.target.type === 'checkbox') return;
+      var cb = this.querySelector('input[type="checkbox"]');
+      cb.checked = !cb.checked;
+      this.classList.toggle('checked', cb.checked);
+    });
+  }
+  var medCBs = document.querySelectorAll('.med-cb');
+  for (var i = 0; i < medCBs.length; i++) {
+    medCBs[i].addEventListener('change', function() {
+      this.closest('.med-row').classList.toggle('checked', this.checked);
+    });
+  }
+
+  // ----- SEND MY DAY -----
+  var sendBtn = document.getElementById('sendDayBtn');
+  if (sendBtn) {
+    sendBtn.addEventListener('click', function() {
+      var today = new Date();
+      var d = today.getDate();
+      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      var dateShort = days[today.getDay()] + ' ' + d + ' ' + months[today.getMonth()] + ' ' + today.getFullYear();
+
+      var sys1 = document.getElementById('sysInput').value;
+      var dia1 = document.getElementById('diaInput').value;
+      var hr1 = document.getElementById('hrInput').value;
+      var time1 = document.getElementById('readingTime').value;
+
+      var sys2 = document.getElementById('sysInput2').value;
+      var dia2 = document.getElementById('diaInput2').value;
+      var hr2 = document.getElementById('hrInput2').value;
+      var time2 = document.getElementById('readingTime2').value;
+
+      // Build compact body
+      var lines = [];
+      lines.push(dateShort);
+      lines.push('');
+
+      if (sys1 && dia1) {
+        var r1 = 'BP1(' + time1 + '): ' + sys1 + '/' + dia1;
+        if (hr1) r1 += ' HR:' + hr1;
+        lines.push(r1);
+      }
+      if (sys2 && dia2) {
+        var r2 = 'BP2(' + time2 + '): ' + sys2 + '/' + dia2;
+        if (hr2) r2 += ' HR:' + hr2;
+        lines.push(r2);
+      }
+
+      // Overall feeling
+      var selectedFeeling = document.querySelector('.feeling-btn.selected');
+      if (selectedFeeling) {
+        lines.push('Feeling: ' + selectedFeeling.getAttribute('data-val') + '/10');
+      }
+
+      // Sleep
+      var sleepH = document.getElementById('sleepHours').value;
+      var sleepM = document.getElementById('sleepMins').value;
+      var sleepScore = document.getElementById('sleepScore').value;
+      if (sleepH || sleepM) {
+        var sl = 'Sleep: ' + (sleepH || '0') + 'h' + (sleepM || '0') + 'm';
+        if (sleepScore) sl += ' Score:' + sleepScore;
+        lines.push(sl);
+      } else if (sleepScore) {
+        lines.push('Sleep score: ' + sleepScore);
+      }
+
+      // Symptoms - compact, comma separated
+      var symList = [];
+      var checked = document.querySelectorAll('.sym-cb:checked');
+      for (var i = 0; i < checked.length; i++) {
+        var label = checked[i].getAttribute('data-sym');
+        var timing = checked[i].closest('.symptom-row').querySelector('.symptom-timing');
+        var when = timing ? timing.textContent : '';
+        // Use short versions
+        var short = label;
+        if (when === 'earlier') short += '(earlier)';
+        symList.push(short);
+      }
+      if (symList.length > 0) {
+        lines.push('');
+        lines.push('Symptoms: ' + symList.join(', '));
+      }
+
+      // Meds - compact
+      var medList = [];
+      var medChecked = document.querySelectorAll('.med-cb:checked');
+      for (var i = 0; i < medChecked.length; i++) {
+        medList.push(medChecked[i].getAttribute('data-med'));
+      }
+      if (medList.length > 0) {
+        lines.push('');
+        lines.push('Meds: ' + medList.join(', '));
+      }
+
+      // Notes - trim only if extremely long
+      var notes = document.getElementById('dayNotes').value;
+      if (notes && notes.trim()) {
+        var trimmed = notes.trim();
+        if (trimmed.length > 800) trimmed = trimmed.substring(0, 800) + '...';
+        lines.push('');
+        lines.push('Notes: ' + trimmed);
+      }
+
+      var body = lines.join('\n');
+      var subject = 'Jillian ' + dateShort;
+      var mattEmail = 'matthewalsford@gmail.com';
+      var mailto = 'mailto:' + mattEmail + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+
+      window.location.href = mailto;
+    });
+  }
+
+}); // end DOMContentLoaded
+</script>
+
+</body>
+</html>
