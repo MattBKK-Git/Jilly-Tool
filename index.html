@@ -785,6 +785,11 @@
       <span class="symptom-label">Wafty — body has no base or structure</span>
       <button class="symptom-timing">now</button>
     </div>
+    <div class="symptom-row">
+      <input type="checkbox" class="sym-cb" data-sym="Numbness/tingling in feet">
+      <span class="symptom-label">Numbness or tingling in feet</span>
+      <button class="symptom-timing">now</button>
+    </div>
 
     <div class="symptom-category-title">Energy &amp; General</div>
     <div class="symptom-row">
@@ -889,9 +894,57 @@
     </div>
   </div>
 
-  <!-- Sleep -->
+  <!-- What Did I Do Today -->
   <div class="evening-section" style="margin-top:16px;">
-    <h3>Last Night's Sleep</h3>
+    <h3>What Did I Do Today?</h3>
+    <p class="section-subtitle" style="margin-bottom:8px;">Tick any that apply.</p>
+
+    <div class="symptom-row act-row">
+      <input type="checkbox" class="act-cb" data-act="Had a bath">
+      <span class="symptom-label">Had a bath</span>
+    </div>
+    <div class="symptom-row act-row">
+      <input type="checkbox" class="act-cb" data-act="Went shopping">
+      <span class="symptom-label">Went shopping</span>
+    </div>
+    <div class="symptom-row act-row">
+      <input type="checkbox" class="act-cb" data-act="Had a visitor">
+      <span class="symptom-label">Had a visitor</span>
+    </div>
+    <div class="symptom-row act-row">
+      <input type="checkbox" class="act-cb" data-act="Garden work">
+      <span class="symptom-label">Garden work</span>
+    </div>
+    <div class="symptom-row act-row">
+      <input type="checkbox" class="act-cb" data-act="Housework">
+      <span class="symptom-label">Housework (washing, cooking, cleaning)</span>
+    </div>
+    <div class="symptom-row act-row">
+      <input type="checkbox" class="act-cb" data-act="Went out in car">
+      <span class="symptom-label">Went out in the car</span>
+    </div>
+    <div class="symptom-row act-row">
+      <input type="checkbox" class="act-cb" data-act="Feldenkrais/movements">
+      <span class="symptom-label">Feldenkrais or body movements</span>
+    </div>
+    <div class="symptom-row act-row">
+      <input type="checkbox" class="act-cb" data-act="Breathing exercises">
+      <span class="symptom-label">Breathing exercises</span>
+    </div>
+    <div class="symptom-row act-row">
+      <input type="checkbox" class="act-cb" data-act="Stayed in bed most of day">
+      <span class="symptom-label">Stayed in bed most of the day</span>
+    </div>
+    <div class="symptom-row act-row">
+      <input type="checkbox" class="act-cb" data-act="Had to lie down">
+      <span class="symptom-label">Had to lie down during the day</span>
+    </div>
+  </div>
+
+  <!-- Sleep (last night / previous night) -->
+  <div class="evening-section" style="margin-top:16px;">
+    <h3>Sleep Last Night</h3>
+    <p class="section-subtitle" style="margin-top:4px;margin-bottom:10px;">How you slept the night before today.</p>
     <div class="reading-row" style="margin-top:12px;">
       <div class="input-group">
         <label>Hours</label>
@@ -946,6 +999,15 @@
     <div class="symptom-row med-row">
       <input type="checkbox" class="med-cb" data-med="¼ Panamax Co.">
       <span class="symptom-label"><strong>¼ Panamax Co.</strong> <span style="color:var(--text-light);font-size:13px;">— for bone pain</span></span>
+    </div>
+  </div>
+
+  <!-- Did I Need Help -->
+  <div class="evening-section" style="margin-top:16px;">
+    <h3>Did I Need Help Today?</h3>
+    <div style="display:flex; gap:10px; margin-top:10px;">
+      <button class="feeling-btn help-btn" data-val="No" style="width:auto;border-radius:10px;padding:12px 24px;font-size:15px;">No</button>
+      <button class="feeling-btn help-btn" data-val="Yes" style="width:auto;border-radius:10px;padding:12px 24px;font-size:15px;">Yes</button>
     </div>
   </div>
 
@@ -1577,11 +1639,11 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // ----- FEELING BUTTONS (1-10) -----
-  var feelingBtns = document.querySelectorAll('.feeling-btn');
+  var feelingBtns = document.querySelectorAll('.feeling-btn:not(.help-btn)');
   for (var i = 0; i < feelingBtns.length; i++) {
     feelingBtns[i].addEventListener('click', function() {
-      // Deselect all
-      var all = document.querySelectorAll('.feeling-btn');
+      // Deselect only feeling buttons, not help buttons
+      var all = document.querySelectorAll('.feeling-btn:not(.help-btn)');
       for (var j = 0; j < all.length; j++) all[j].classList.remove('selected');
       // Select this one
       this.classList.add('selected');
@@ -1602,6 +1664,33 @@ document.addEventListener('DOMContentLoaded', function() {
   for (var i = 0; i < medCBs.length; i++) {
     medCBs[i].addEventListener('change', function() {
       this.closest('.med-row').classList.toggle('checked', this.checked);
+    });
+  }
+
+  // ----- ACTIVITY ROWS -----
+  var actRows = document.querySelectorAll('.act-row');
+  for (var i = 0; i < actRows.length; i++) {
+    actRows[i].addEventListener('click', function(e) {
+      if (e.target.type === 'checkbox') return;
+      var cb = this.querySelector('input[type="checkbox"]');
+      cb.checked = !cb.checked;
+      this.classList.toggle('checked', cb.checked);
+    });
+  }
+  var actCBs = document.querySelectorAll('.act-cb');
+  for (var i = 0; i < actCBs.length; i++) {
+    actCBs[i].addEventListener('change', function() {
+      this.closest('.act-row').classList.toggle('checked', this.checked);
+    });
+  }
+
+  // ----- HELP BUTTONS (Yes/No) -----
+  var helpBtns = document.querySelectorAll('.help-btn');
+  for (var i = 0; i < helpBtns.length; i++) {
+    helpBtns[i].addEventListener('click', function() {
+      var all = document.querySelectorAll('.help-btn');
+      for (var j = 0; j < all.length; j++) all[j].classList.remove('selected');
+      this.classList.add('selected');
     });
   }
 
@@ -1652,11 +1741,11 @@ document.addEventListener('DOMContentLoaded', function() {
       var sleepM = document.getElementById('sleepMins').value;
       var sleepScore = document.getElementById('sleepScore').value;
       if (sleepH || sleepM) {
-        var sl = 'Sleep: ' + (sleepH || '0') + 'h' + (sleepM || '0') + 'm';
+        var sl = 'Sleep (night before): ' + (sleepH || '0') + 'h' + (sleepM || '0') + 'm';
         if (sleepScore) sl += ' Score:' + sleepScore;
         lines.push(sl);
       } else if (sleepScore) {
-        lines.push('Sleep score: ' + sleepScore);
+        lines.push('Sleep score (night before): ' + sleepScore);
       }
 
       // Symptoms - compact, comma separated
@@ -1685,6 +1774,23 @@ document.addEventListener('DOMContentLoaded', function() {
       if (medList.length > 0) {
         lines.push('');
         lines.push('Meds: ' + medList.join(', '));
+      }
+
+      // Activities - compact
+      var actList = [];
+      var actChecked = document.querySelectorAll('.act-cb:checked');
+      for (var i = 0; i < actChecked.length; i++) {
+        actList.push(actChecked[i].getAttribute('data-act'));
+      }
+      if (actList.length > 0) {
+        lines.push('');
+        lines.push('Activities: ' + actList.join(', '));
+      }
+
+      // Help needed
+      var helpBtn = document.querySelector('.help-btn.selected');
+      if (helpBtn) {
+        lines.push('Needed help: ' + helpBtn.getAttribute('data-val'));
       }
 
       // Notes - trim only if extremely long
